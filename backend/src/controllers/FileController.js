@@ -13,11 +13,14 @@ class FileController {
     });
 
     // Add the created file at the box.files array
-    console.log('File', file);
     box.files.push(file);
-
     await box.save();
 
+    // When a file is add to the database, emit a socket event
+    // to each user at the box's socket room
+    req.io.sockets.in(box._id).emit('file', file);
+
+    // Response with the created File
     return res.json(file);
   }
 }

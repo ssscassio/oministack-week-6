@@ -1,6 +1,6 @@
 const express = require('express'),
-  router = express.Router();
+  routes = express.Router();
 
-router.use('/boxes', require('./boxes'));
+routes.use('/boxes', require('./boxes'));
 
-module.exports = router;
+module.exports = routes;
