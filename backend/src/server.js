@@ -43,7 +43,7 @@ app.use(express.json());
 // Parse incoming requests with urlencoded payloads
 app.use(express.urlencoded({ extended: true }));
 // Add path to resolve files
-app.use('/files', express.static(path.resolve(__dirname, '..', 'temp')));
+app.use('/files', express.static(path.resolve(__dirname, '..', 'files')));
 // End points
 app.use(require('./routes'));
 
