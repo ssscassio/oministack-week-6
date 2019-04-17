@@ -1,0 +1,6 @@
+# Add node_modules to gitignore
+node_modules
+
+# Ignore files inside files folder but keep the folder
+files/*
+!files/.gitkeep
