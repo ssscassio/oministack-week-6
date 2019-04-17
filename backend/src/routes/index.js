@@ -1,5 +1,5 @@
 const express = require('express'),
-  routes = express.Router();
+  router = express.Router();
 
 router.use('/boxes', require('./boxes'));
 
