@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // TODO: Change for my heroku application
-export const baseURL = 'https://oministack-backend-lucas.herokuapp.com';
+export const baseURL = 'https://omnistack-week.herokuapp.com';
 const api = axios.create({
   baseURL: baseURL
 });

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import Dropzone from 'react-dropzone';
 import { distanceInWords } from 'date-fns';
 import pt from 'date-fns/locale/pt';
@@ -11,30 +11,37 @@ import { MdInsertDriveFile } from 'react-icons/md';
 import logo from '../../assets/logo.svg';
 import './styles.css';
 
+function reducer(box, action) {
+  switch (action.type) {
+    case 'ADD_FILE':
+      return { ...box, files: [action.data, ...box.files] };
+    case 'GET_BOX':
+      return action.data;
+    default:
+      return box;
+  }
+}
+
 const Box = props => {
-  const [box, setBox] = useState({});
+  var [box, dispatchBox] = useReducer(reducer, {});
 
-  const subscribeToNewFiles = () => {
-    const box = props.match.params.id;
-
+  function subscribeToNewFiles() {
+    const boxId = props.match.params.id;
     const io = socket(baseURL);
-
-    io.emit('connectRoom', box);
-
+    io.emit('connectRoom', boxId);
     io.on('file', data => {
-      setBox({
-        ...box,
-        files: [data, ...box.files]
-      });
+      dispatchBox({ type: 'ADD_FILE', data: data });
     });
-  };
+  }
 
-  // Use Effects with no dependencies is equal to component did Mount
-  useEffect(async () => {
+  useEffect(() => {
     subscribeToNewFiles();
-    const boxId = props.match.param.id;
-    const response = await api.get(`/boxes/${boxId}`);
-    setBox(response.data);
+    async function fetchApi() {
+      const boxId = props.match.params.id;
+      const response = await api.get(`/boxes/${boxId}`);
+      dispatchBox({ type: 'GET_BOX', data: response.data });
+    }
+    fetchApi();
   }, []);
 
   const handleUpload = files => {

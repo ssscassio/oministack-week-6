@@ -11,9 +11,8 @@ const Main = props => {
   const [newBox, setNewBox] = useState('');
 
   const handleSubmit = async e => {
-    console.log('HandleSubmit');
+    e.preventDefault();
     const response = await api.post('/boxes', { title: newBox });
-    console.log('Response', response);
     props.history.push(`/box/${response.data._id}`);
   };
 
