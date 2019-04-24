@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/oministack-week-6/precache-manifest.cf08a81d399843da337436578fc62629.js"
+  "/oministack-week-6/precache-manifest.316dd6b3d0cd0b40070eb099e3014d5d.js"
 );
 
 workbox.clientsClaim();
