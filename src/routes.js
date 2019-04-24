@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 
 import Main from './pages/Main';
 import Box from './pages/Box';
@@ -9,12 +9,12 @@ import Box from './pages/Box';
  * the URL.
  */
 const Routes = () => (
-  <BrowserRouter>
+  <HashRouter>
     <Switch>
       <Route path="/" exact component={Main} />
       <Route path="/box/:id" component={Box} />
     </Switch>
-  </BrowserRouter>
+  </HashRouter>
 );
 
 export default Routes;
